@@ -24,6 +24,8 @@ $ cargo run
 
 Then start querying at `http://localhost:8000/`
 
-## Notes
+----
 
-This project still on progress.
+**NOTE:** This is a work in progress, but it should build, run and let you get
+started. So if anything is broken feel free to
+open an issue or a PR.
