@@ -22,7 +22,7 @@ First, type this command:
 $ cargo run
 ```
 
-Then start querying at `http://localhost:8000/users/`
+Then start querying at `http://localhost:8000/`
 
 ## Notes
 
