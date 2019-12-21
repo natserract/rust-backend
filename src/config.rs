@@ -18,7 +18,6 @@ use crate::models;
 type MysqlPool = Pool<ConnectionManager<MysqlConnection>>;
 
 // -> Init database pool/conn
-
 fn init_pool(db_url: String) -> MysqlPool {
     let connect = ConnectionManager::<MysqlConnection>::new(db_url);
     Pool::new(connect).expect("Failed to create pool!")
@@ -40,7 +39,7 @@ pub fn connect_db() -> rocket::Rocket {
         .mount(
             "/",
             routes![
-                routes::user_route::index, 
+                routes::user_route::index,
                 routes::user_route::view_users,
                 routes::user_route::create_user
             ],
@@ -49,6 +48,7 @@ pub fn connect_db() -> rocket::Rocket {
         .register(catchers![routes::not_found])
 }
 
+// -> Request Handler
 pub struct Connection(pub PooledConnection<ConnectionManager<MysqlConnection>>);
 
 impl<'a, 'r> FromRequest<'a, 'r> for Connection {
