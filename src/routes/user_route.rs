@@ -16,6 +16,13 @@ pub fn view_all_users(connection: config::Connection) -> JsonValue {
     json!({ "users": result })
 }
 
+#[get("/users/<user_id>")]
+pub fn view_user_by_id(user_id: i32, connection: config::Connection) -> Option<JsonValue> {
+    query::view_user_by_id(user_id, &connection).map(|user| json!({
+        "users": user
+    }))
+}
+
 #[post("/users", data = "<user_field>")]
 pub fn create_user(user_field: Json<NewUser>, connection: config::Connection) -> Json<NewUser> {
     let new_user = user_field.into_inner();

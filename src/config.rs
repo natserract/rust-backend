@@ -28,7 +28,7 @@ fn enable_cors() -> Cors {
     Cors::from_options(&Default::default()).expect("Cors can't be created")
 }
 
-// -> Launch App
+// -> Launch App Routes
 pub fn connect_db() -> rocket::Rocket {
     dotenv().ok();
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set!");
@@ -42,7 +42,8 @@ pub fn connect_db() -> rocket::Rocket {
                 routes::user_route::view_all_users,
                 routes::user_route::create_user,
                 routes::user_route::delete_user,
-                routes::user_route::update_user
+                routes::user_route::update_user,
+                routes::user_route::view_user_by_id
             ],
         )
         .attach(enable_cors())

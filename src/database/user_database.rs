@@ -15,6 +15,14 @@ pub fn view_all_users(connection: &MysqlConnection) -> Vec<User> {
         .unwrap()
 }
 
+pub fn view_user_by_id(user_id: i32, connection: &MysqlConnection) -> Option<User> {
+    user::table
+        .find(user_id)
+        .get_result(connection)
+        .map_err(|err| println!("find_user: {}", err))
+        .ok()
+}
+
 pub fn create_user(user_field: NewUser, connection: &MysqlConnection) -> NewUser {
     diesel::insert_into(user::table)
         .values(&user_field)
