@@ -11,9 +11,10 @@ pub struct User {
 }
 
 #[table_name = "user"]
-#[derive(Serialize, Deserialize, Insertable, Queryable)]
+#[derive(Serialize, Deserialize, Insertable, Queryable, AsChangeset)]
 pub struct NewUser {
     #[serde(skip_deserializing)]
     pub id: i32,
     pub names: String,
 }
+

@@ -4,31 +4,33 @@ use rocket_contrib::json::{Json, JsonValue};
 use rocket::http::Status;
 
 use crate::models;
-use models::user_model::NewUser;
+use models::user_model::{ NewUser };
 
 use crate::database;
 use database::user_database as query;
 
-#[get("/")]
-pub fn index() -> String {
-    format!("Application sucessfully started")
-}
 
 #[get("/users")]
-pub fn view_users(connection: config::Connection) -> JsonValue {
-    let result = query::view_users(&connection);
+pub fn view_all_users(connection: config::Connection) -> JsonValue {
+    let result = query::view_all_users(&connection);
     json!({ "users": result })
 }
 
-#[post("/users", data = "<user>")]
-pub fn create_user(user: Json<NewUser>, connection: config::Connection) -> Json<NewUser> {
-    let new_user = user.into_inner();
-
-    return Json(query::create_user(new_user, &connection));
+#[post("/users", data = "<user_field>")]
+pub fn create_user(user_field: Json<NewUser>, connection: config::Connection) -> Json<NewUser> {
+    let new_user = user_field.into_inner();
+    Json(query::create_user(new_user, &connection))
 }
 
-#[delete("/users/<id>")]
-pub fn delete_user(id: i32, connection: config::Connection) -> JsonValue {
-    let result = query::delete_user(id, &connection);
-    json!({ "users": result })
+#[put("/users/<user_id>", data = "<user_field>")]
+pub fn update_user(user_id: i32, user_field: Json<NewUser>, connection: config::Connection) -> String {
+    let result = user_field.into_inner();
+    let query = query::update_user(user_id, result, &connection);
+    format!("{}", query)
+}
+
+#[delete("/users/<user_id>")]
+pub fn delete_user(user_id: i32, connection: config::Connection) -> String {
+    let result = query::delete_user(user_id, &connection);
+    format!("{}", result)
 }

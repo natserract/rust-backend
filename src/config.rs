@@ -39,10 +39,10 @@ pub fn connect_db() -> rocket::Rocket {
         .mount(
             "/",
             routes![
-                routes::user_route::index,
-                routes::user_route::view_users,
+                routes::user_route::view_all_users,
                 routes::user_route::create_user,
-                routes::user_route::delete_user
+                routes::user_route::delete_user,
+                routes::user_route::update_user
             ],
         )
         .attach(enable_cors())
