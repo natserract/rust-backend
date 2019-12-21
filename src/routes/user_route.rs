@@ -17,8 +17,8 @@ pub fn view_all_users(connection: config::Connection) -> JsonValue {
 }
 
 #[get("/users/<user_id>")]
-pub fn view_user_by_id(user_id: i32, connection: config::Connection) -> Option<JsonValue> {
-    query::view_user_by_id(user_id, &connection).map(|user| json!({
+pub fn find_user_by_id(user_id: i32, connection: config::Connection) -> Option<JsonValue> {
+    query::find_user_by_id(user_id, &connection).map(|user| json!({
         "users": user
     }))
 }

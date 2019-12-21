@@ -43,7 +43,7 @@ pub fn connect_db() -> rocket::Rocket {
                 routes::user_route::create_user,
                 routes::user_route::delete_user,
                 routes::user_route::update_user,
-                routes::user_route::view_user_by_id
+                routes::user_route::find_user_by_id
             ],
         )
         .attach(enable_cors())
