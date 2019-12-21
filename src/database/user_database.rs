@@ -27,3 +27,6 @@ pub fn create_user(user: NewUser, connection: &MysqlConnection) -> NewUser {
         .unwrap()
 }
 
+pub fn delete_user(user_id: i32, connection: &MysqlConnection) -> bool{
+    diesel::delete(user::table.find(user_id)).execute(connection).is_ok()
+}

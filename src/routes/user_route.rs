@@ -7,7 +7,7 @@ use crate::models;
 use models::user_model::NewUser;
 
 use crate::database;
-use database::user_database;
+use database::user_database as query;
 
 #[get("/")]
 pub fn index() -> String {
@@ -16,7 +16,7 @@ pub fn index() -> String {
 
 #[get("/users")]
 pub fn view_users(connection: config::Connection) -> JsonValue {
-    let result = user_database::view_users(&connection);
+    let result = query::view_users(&connection);
     json!({ "users": result })
 }
 
@@ -24,5 +24,11 @@ pub fn view_users(connection: config::Connection) -> JsonValue {
 pub fn create_user(user: Json<NewUser>, connection: config::Connection) -> Json<NewUser> {
     let new_user = user.into_inner();
 
-    return Json(user_database::create_user(new_user, &connection));
+    return Json(query::create_user(new_user, &connection));
+}
+
+#[delete("/users/<id>")]
+pub fn delete_user(id: i32, connection: config::Connection) -> JsonValue {
+    let result = query::delete_user(id, &connection);
+    json!({ "users": result })
 }
