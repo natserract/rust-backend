@@ -3,6 +3,6 @@ table! {
         id -> Integer,
         name -> Varchar,
         email -> Varchar,
-        password -> Text,
+        password -> Varchar,
     }
 }

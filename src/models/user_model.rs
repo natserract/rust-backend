@@ -1,6 +1,5 @@
 
 use crate::schema::users;
-use crate::schema::users::dsl::users as all_users;
 
 use serde::{Deserialize, Serialize};
 
