@@ -4,5 +4,7 @@ table! {
         name -> Varchar,
         email -> Varchar,
         password -> Varchar,
+        created_at -> Nullable<Timestamp>,
+        updated_at -> Nullable<Timestamp>,
     }
 }

@@ -27,7 +27,12 @@ pub fn route_create_user(user_field: Json<NewUser>, connection: config::Connecti
     let email = new_user.email;
     let password = new_user.password;
 
-    Json(action::query_create_user(&connection, name, email, password))
+    Json(action::query_create_user(
+        &connection,
+        name,
+        email,
+        password,
+    ))
 }
 
 #[put("/user/<user_id>", data = "<user_field>")]

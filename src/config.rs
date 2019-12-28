@@ -17,7 +17,7 @@ use dotenv::dotenv;
 use std::env;
 
 use crate::models;
-
+use crate::error;
 
 type MysqlPool = Pool<ConnectionManager<MysqlConnection>>;
 
@@ -28,7 +28,8 @@ fn init_pool(db_url: String) -> MysqlPool {
 }
 
 fn enable_cors() -> Cors {
-    Cors::from_options(&Default::default()).expect("Cors can't be created")
+    Cors::from_options(&Default::default())
+        .expect("Cors can't be created")
 }
 
 // -> Launch App Routes
@@ -51,7 +52,9 @@ pub fn connect_db() -> rocket::Rocket {
             ],
         )
         .attach(enable_cors())
-        .register(catchers![routes::not_found])
+        .register(
+            catchers![error::error_status]
+        )
 }
 
 

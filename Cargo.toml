@@ -16,7 +16,7 @@ env_logger = "0.7.1"
 chrono = { version = "0.4.6", features = ["serde"] }
 
 # For connecting with the MySQL database
-diesel = { version = "1.0.0", features = ["mysql", "r2d2"] }
+diesel = { version = "1.0.0", features = ["mysql", "r2d2", "chrono"] }
 
 #rocket-webserver
 rocket = "0.4.2"

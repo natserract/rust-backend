@@ -9,6 +9,8 @@ use crate::schema::users::dsl::users as all_users;
 use crate::models;
 use models::user_model::{NewUser, UpdateUser, User};
 
+use chrono::Local;
+
 use crypto::scrypt::{scrypt_check, scrypt_simple, ScryptParams};
 
 pub fn query_view_all_users(connection: &MysqlConnection) -> Vec<User> {
@@ -26,21 +28,23 @@ pub fn query_find_user_by_id(user_id: i32, connection: &MysqlConnection) -> Opti
         .ok()
 }
 
-
 pub fn query_create_user(
     connection: &MysqlConnection,
     name: &str,
     email: &str,
-    password_param: &str,
+    hash: &str,
 ) -> User {
     // Password hashing <-
-    let params = ScryptParams::new(16, 4, 1);
-    let password = &scrypt_simple(password_param, &params).unwrap_or("".to_string());
+    let params = ScryptParams::new(5, 8, 1);
+    let password = &scrypt_simple(hash, &params).unwrap_or("".to_string());
+    let created_at = Some(Local::now().naive_local());
 
     let new_user = &NewUser {
         name,
         email,
         password,
+        created_at: created_at,
+        updated_at: None,
     };
 
     diesel::insert_into(users::table)
@@ -59,8 +63,11 @@ pub fn query_update_user(
     user_field: UpdateUser,
     connection: &MysqlConnection,
 ) -> bool {
+    let updated_at = Some(Local::now().naive_local());
     let data = &UpdateUser {
         password: None,
+        created_at: None,
+        updated_at: updated_at,
         ..user_field.clone()
     };
 
