@@ -3,7 +3,7 @@ use crate::schema::users;
 use serde::{Deserialize, Serialize};
 use chrono::NaiveDateTime;
 
-#[derive(Serialize, Deserialize, AsChangeset, Queryable)]
+#[derive(Serialize, Deserialize, Queryable)]
 pub struct User {
     pub id: i32,
     pub name: String,

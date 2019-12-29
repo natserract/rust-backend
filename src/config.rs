@@ -9,15 +9,13 @@ use rocket_cors::Cors;
 use std::ops::Deref;
 
 use super::routes;
-use routes::{
-    user_route
-};
+use routes::{issues_route, user_route};
 
 use dotenv::dotenv;
 use std::env;
 
+use crate::hooks;
 use crate::models;
-use crate::error;
 
 type MysqlPool = Pool<ConnectionManager<MysqlConnection>>;
 
@@ -28,8 +26,7 @@ fn init_pool(db_url: String) -> MysqlPool {
 }
 
 fn enable_cors() -> Cors {
-    Cors::from_options(&Default::default())
-        .expect("Cors can't be created")
+    Cors::from_options(&Default::default()).expect("Cors can't be created")
 }
 
 // -> Launch App Routes
@@ -47,16 +44,16 @@ pub fn connect_db() -> rocket::Rocket {
                 user_route::route_create_user,
                 user_route::route_delete_user,
                 user_route::route_update_user,
-                user_route::route_find_user_by_id,
-                user_route::route_delete_all_user
+                user_route::route_find_user,
+                user_route::route_delete_all_user,
+                issues_route::route_view_all_issues,
+                issues_route::route_find_user,
+                issues_route::route_create_user
             ],
         )
         .attach(enable_cors())
-        .register(
-            catchers![error::error_status]
-        )
+        .register(catchers![hooks::error_status])
 }
-
 
 pub struct Connection(pub PooledConnection<ConnectionManager<MysqlConnection>>);
 

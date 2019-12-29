@@ -13,7 +13,7 @@ mod models;
 mod schema;
 mod config;
 mod database;
-mod error;
+mod hooks;
 
 fn main() {
    config::connect_db().launch();

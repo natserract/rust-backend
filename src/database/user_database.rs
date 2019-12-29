@@ -20,7 +20,7 @@ pub fn query_view_all_users(connection: &MysqlConnection) -> Vec<User> {
         .unwrap()
 }
 
-pub fn query_find_user_by_id(user_id: i32, connection: &MysqlConnection) -> Option<User> {
+pub fn query_find_user(user_id: i32, connection: &MysqlConnection) -> Option<User> {
     users::table
         .find(user_id)
         .get_result(connection)
