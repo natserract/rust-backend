@@ -8,7 +8,6 @@ use rand::{
     Rng
 };
 
-// -> Handle Not Found Routes
 #[catch(404)]
 pub fn error_status() -> JsonValue {
     json!({
@@ -19,9 +18,8 @@ pub fn error_status() -> JsonValue {
 
 pub fn slugify(title: &str) -> String {
     if cfg!(feature = "random-suffix") {
-        format!("{}-{}-{}",  
-            generate_suffix(9).to_lowercase(), 
-            generate_suffix(4).to_lowercase(), 
+        format!("{}-{}", 
+            slug::slugify(title), 
             generate_suffix(10).to_lowercase())
     } else {
         slug::slugify(title)
