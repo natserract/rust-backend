@@ -58,7 +58,7 @@ pub fn query_create_user(
         .unwrap()
 }
 
-pub fn query_update_user(
+pub fn query_update_user( 
     user_id: i32,
     user_field: UpdateUser,
     connection: &MysqlConnection,

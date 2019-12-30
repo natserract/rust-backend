@@ -8,20 +8,21 @@ use rand::{
     Rng
 };
 
-const SUFFIX_LEN: usize = 6;
-
 // -> Handle Not Found Routes
 #[catch(404)]
 pub fn error_status() -> JsonValue {
     json!({
         "status": "Error",
-        "reason": "Resource was not found"
+        "reason": "Resource was not found {}",
     })
 }
 
 pub fn slugify(title: &str) -> String {
     if cfg!(feature = "random-suffix") {
-        format!("{}-{}", slug::slugify(title), generate_suffix(SUFFIX_LEN))
+        format!("{}-{}-{}",  
+            generate_suffix(9).to_lowercase(), 
+            generate_suffix(4).to_lowercase(), 
+            generate_suffix(10).to_lowercase())
     } else {
         slug::slugify(title)
     }

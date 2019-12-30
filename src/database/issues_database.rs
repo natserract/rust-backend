@@ -26,7 +26,7 @@ pub fn query_find_issue(issue_id: i32, connection: &MysqlConnection) -> Option<I
     issues::table
         .find(issue_id)
         .get_result(connection)
-        .map_err(|err| println!("find_user: {}", err))
+        .map_err(|err| println!("Error: {}", err))
         .ok()
 }
 
@@ -58,7 +58,7 @@ pub fn query_create_issues(
             .values(new_issue)
             .execute(connection)
             .ok(),
-        false => panic!("Error"),
+        false => panic!("Error! You must be login/register account"),
     };
 
     issues::table
