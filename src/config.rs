@@ -47,8 +47,9 @@ pub fn connect_db() -> rocket::Rocket {
                 user_route::route_find_user,
                 user_route::route_delete_all_user,
                 issues_route::route_view_all_issues,
-                issues_route::route_find_user,
-                issues_route::route_create_user
+                issues_route::route_find_issue,
+                issues_route::route_create_issue,
+                issues_route::route_update_issue
             ],
         )
         .attach(enable_cors())

@@ -60,7 +60,7 @@ pub fn query_create_user(
 
 pub fn query_update_user( 
     user_id: i32,
-    user_field: UpdateUser,
+    user_data: UpdateUser,
     connection: &MysqlConnection,
 ) -> bool {
     let updated_at = Some(Local::now().naive_local());
@@ -68,7 +68,7 @@ pub fn query_update_user(
         password: None,
         created_at: None,
         updated_at: updated_at,
-        ..user_field.clone()
+        ..user_data.clone()
     };
 
     diesel::update(users::table.find(user_id))
