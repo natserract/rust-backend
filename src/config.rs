@@ -40,16 +40,17 @@ pub fn connect_db() -> rocket::Rocket {
         .mount(
             "/",
             routes![
-                user_route::route_view_all_users,
-                user_route::route_create_user,
-                user_route::route_delete_user,
-                user_route::route_update_user,
-                user_route::route_find_user,
-                user_route::route_delete_all_user,
-                issues_route::route_view_all_issues,
-                issues_route::route_find_issue,
-                issues_route::route_create_issue,
-                issues_route::route_update_issue
+                user_route::view_all_users,
+                user_route::create_user,
+                user_route::delete_user,
+                user_route::update_user,
+                user_route::find_user,
+                user_route::delete_all_user,
+                issues_route::view_all_issues,
+                issues_route::find_issue,
+                issues_route::find_issue_by_author,
+                issues_route::create_issue,
+                issues_route::update_issue
             ],
         )
         .attach(enable_cors())

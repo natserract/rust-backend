@@ -30,6 +30,32 @@ pub fn query_find_issue(slug: &str, connection: &MysqlConnection) -> Option<Issu
         .ok()
 }
 
+
+pub fn query_find_issue_by_author(author: i32, slug: &str, connection: &MysqlConnection) -> Option<Issues> {
+    // Find user
+    let find_author = users::table
+        .find(author)
+        .get_result::<User>(connection)
+        .is_ok();
+
+    // Find issue post slug
+    let find_slug = issues::table
+        .filter(issues::slug.eq(slug))
+        .get_result::<Issues>(connection)
+        .is_ok();
+
+    if find_author == true && find_slug == true {
+        issues::table
+            .filter(issues::slug.eq(slug))
+            .get_result(connection)
+            .map_err(|err| println!("Error: {}", err))
+            .ok()
+    } else {
+        panic!("Sorry the issue you are looking for is not available")
+    }
+
+}
+
 pub fn query_create_issue(
     connection: &MysqlConnection,
     title: &str,
@@ -80,7 +106,7 @@ pub fn query_update_issue(
         .get_result::<User>(connection)
         .is_ok();
 
-    // Find article slug
+    // Find issue slug
     let find_slug = issues::table
         .filter(issues::slug.eq(slug))
         .get_result::<Issues>(connection)
