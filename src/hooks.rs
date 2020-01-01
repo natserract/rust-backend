@@ -1,6 +1,6 @@
 
 use slug;
-use rocket_contrib::json::{ Json, JsonValue};
+use rocket_contrib::json::{JsonValue};
 
 use rand::{
     distributions::Alphanumeric,
