@@ -1,4 +1,15 @@
 table! {
+    rust_db.comments (id) {
+        id -> Integer,
+        body -> Text,
+        author -> Integer,
+        issues -> Integer,
+        created_at -> Nullable<Timestamp>,
+        updated_at -> Nullable<Timestamp>,
+    }
+}
+
+table! {
     rust_db.issues (id) {
         id -> Integer,
         slug -> Text,
@@ -22,6 +33,7 @@ table! {
 }
 
 allow_tables_to_appear_in_same_query!(
+    comments,
     issues,
     users,
 );
