@@ -1,3 +1,4 @@
 
-pub mod user_database;
-pub mod issues_database;
+pub mod users;
+pub mod issues;
+pub mod comment;

@@ -4,10 +4,10 @@ use rocket_contrib::json::{Json, JsonValue};
 use rocket::http::Status;
 
 use crate::models;
-use models::user_model::{NewUser, UpdateUser, User};
+use models::users::{NewUser, UpdateUser, User};
 
 use crate::database;
-use database::user_database as action;
+use database::users as action;
 
 #[get("/users")]
 pub fn view_all_users(connection: config::Connection) -> JsonValue {

@@ -9,7 +9,7 @@ use rocket_cors::Cors;
 use std::ops::Deref;
 
 use super::routes;
-use routes::{issues_route, user_route};
+use routes::{issues, users};
 
 use dotenv::dotenv;
 use std::env;
@@ -40,17 +40,17 @@ pub fn connect_db() -> rocket::Rocket {
         .mount(
             "/",
             routes![
-                user_route::view_all_users,
-                user_route::create_user,
-                user_route::delete_user,
-                user_route::update_user,
-                user_route::find_user,
-                user_route::delete_all_user,
-                issues_route::view_all_issues,
-                issues_route::find_issue,
-                issues_route::find_issue_by_author,
-                issues_route::create_issue,
-                issues_route::update_issue
+                users::view_all_users,
+                users::create_user,
+                users::delete_user,
+                users::update_user,
+                users::find_user,
+                users::delete_all_user,
+                issues::view_all_issues,
+                issues::find_issue,
+                issues::find_issue_by_author,
+                issues::create_issue,
+                issues::update_issue
             ],
         )
         .attach(enable_cors())

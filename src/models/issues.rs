@@ -1,8 +1,8 @@
 use crate::schema::issues;
 use chrono::NaiveDateTime;
 
-use crate::models::user_model;
-use user_model::User;
+use crate::models::users;
+use users::User;
 
 use rocket_contrib::json::{Json, JsonValue};
 

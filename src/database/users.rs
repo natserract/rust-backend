@@ -7,7 +7,7 @@ use crate::schema::users;
 use crate::schema::users::dsl::users as all_users;
 
 use crate::models;
-use models::user_model::{NewUser, UpdateUser, User};
+use models::users::{NewUser, UpdateUser, User};
 
 use chrono::Local;
 

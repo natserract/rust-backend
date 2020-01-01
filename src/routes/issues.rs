@@ -4,10 +4,10 @@ use rocket_contrib::json::{Json, JsonValue};
 use rocket::http::Status;
 
 use crate::models;
-use models::issues_model::{Issues, NewIssues, UpdateIssues};
+use models::issues::{Issues, NewIssues, UpdateIssues};
 
 use crate::database;
-use database::issues_database as action;
+use database::issues as action;
 
 #[get("/issues")]
 pub fn view_all_issues(connection: config::Connection) -> JsonValue {

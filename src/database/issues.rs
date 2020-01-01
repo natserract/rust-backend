@@ -9,8 +9,8 @@ use crate::schema::users;
 use diesel::result::{DatabaseErrorKind, Error};
 
 use crate::models;
-use models::issues_model::{Issues, NewIssues, UpdateIssues};
-use models::user_model::User;
+use models::issues::{Issues, NewIssues, UpdateIssues};
+use models::users::User;
 
 use crate::hooks;
 use chrono::Local;
